@@ -40,15 +40,34 @@ const markup = galleryItems
 
 galleryEl.innerHTML = markup;
 
-const imageEl = document.querySelector(".gallery__image");
+let instance;
 
 function onClick(event) {
   event.preventDefault();
   console.dir(event.target);
-  const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="1280">
 `);
+  console.log(instance);
   instance.show();
 }
 
 galleryEl.addEventListener("click", onClick);
+
+// function onCloseModal(event) {
+//   console.dir(event);
+//   if (event.code === "Escape") {
+//     const box = document.querySelector(".basicLightbox");
+//     box.classList.value = "";
+//     console.log(box.classList);
+//   }
+// }
+
+function onCloseModal(event) {
+  console.dir(event);
+  if (event.code === "Escape") {
+    instance.close();
+  }
+}
+
+document.addEventListener("keydown", onCloseModal);
