@@ -42,15 +42,20 @@ galleryEl.innerHTML = markup;
 
 let instance;
 
+galleryEl.addEventListener("click", onClick);
+
 function onClick(event) {
   event.preventDefault();
-  instance = basicLightbox.create(`
+  console.dir(event.target);
+  if (event.target.tagName === "DIV") {
+    return;
+  } else
+    instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="1280">
 `);
   instance.show();
+  document.addEventListener("keydown", onCloseModal);
 }
-
-galleryEl.addEventListener("click", onClick);
 
 // function onCloseModal(event) {
 //   console.dir(event);
@@ -62,9 +67,9 @@ galleryEl.addEventListener("click", onClick);
 // }
 
 function onCloseModal(event) {
+  console.log(event);
   if (event.code === "Escape") {
     instance.close();
+    document.removeEventListener("keydown", onCloseModal);
   }
 }
-
-document.addEventListener("keydown", onCloseModal);
