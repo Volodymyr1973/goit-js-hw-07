@@ -30,5 +30,12 @@ function onClick(event) {
 galleryEl.addEventListener("click", onClick);
 
 var lightbox = new SimpleLightbox(".gallery a", {
-  /* options */
+  captions: true,
+  captionSelector: "img",
+  captionType: "alt",
+  captionPosition: "bottom",
+
+  captionDelay: 250,
+  enableKeyboard: true,
+  heightRatio: 0.9,
 });
